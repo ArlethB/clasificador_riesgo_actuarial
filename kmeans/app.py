@@ -18,8 +18,6 @@ EXPLICACIONES = {
     "Alto": "Este cliente fue agrupado con perfiles de mayor costo médico promedio y/o factores de riesgo relevantes.",
 }
 
-COLOR_RIESGO = {"Bajo": "", "Medio": "", "Alto": ""}
-
 
 @st.cache_resource
 def load_model():
@@ -68,7 +66,7 @@ def evaluar_cliente(modelo, mapa_riesgo, age, sex, bmi, children, smoker, region
     return cluster, riesgo, EXPLICACIONES[riesgo]
 
 
-st.set_page_config(page_title="Riesgo Actuarial - Clustering", page_icon="🏥")
+st.set_page_config(page_title="Riesgo Actuarial - Clustering")
 
 st.title("Clasificador de Riesgo Actuarial")
 st.caption("Arleth Adyani Chevez Bonilla — Cuenta: 20221900251")
@@ -82,7 +80,7 @@ st.write(
 modelo, metadata, mapa_riesgo = load_model()
 df_clusters = load_clusters_csv()
 
-with st.expander("¡ Sobre el modelo"):
+with st.expander("Sobre el modelo"):
     st.write(f"**Tipo de modelo:** {metadata['tipo_modelo']}")
     st.write(f"**Número de clusters:** {metadata['n_clusters']}")
     st.write(
@@ -115,7 +113,15 @@ if enviado:
     )
 
     st.subheader("Resultado")
-    st.success(f"{COLOR_RIESGO[riesgo]} **Riesgo actuarial: {riesgo}**  (Cluster {cluster})")
+
+    mensaje_resultado = f"**Riesgo actuarial: {riesgo}**  (Cluster {cluster})"
+    if riesgo == "Bajo":
+        st.success(mensaje_resultado)
+    elif riesgo == "Medio":
+        st.warning(mensaje_resultado)
+    else:
+        st.error(mensaje_resultado)
+
     st.write(explicacion)
 
     if df_clusters is not None:
