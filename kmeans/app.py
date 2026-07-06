@@ -18,7 +18,7 @@ EXPLICACIONES = {
     "Alto": "Este cliente fue agrupado con perfiles de mayor costo médico promedio y/o factores de riesgo relevantes.",
 }
 
-COLOR_RIESGO = {"Bajo": "🟢", "Medio": "🟡", "Alto": "🔴"}
+COLOR_RIESGO = {"Bajo": "", "Medio": "", "Alto": ""}
 
 
 @st.cache_resource
@@ -82,7 +82,7 @@ st.write(
 modelo, metadata, mapa_riesgo = load_model()
 df_clusters = load_clusters_csv()
 
-with st.expander("ℹ️ Sobre el modelo"):
+with st.expander("¡ Sobre el modelo"):
     st.write(f"**Tipo de modelo:** {metadata['tipo_modelo']}")
     st.write(f"**Número de clusters:** {metadata['n_clusters']}")
     st.write(f"**Silhouette score:** {metadata['silhouette_score']}")
