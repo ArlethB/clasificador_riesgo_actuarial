@@ -85,7 +85,6 @@ df_clusters = load_clusters_csv()
 with st.expander("¡ Sobre el modelo"):
     st.write(f"**Tipo de modelo:** {metadata['tipo_modelo']}")
     st.write(f"**Número de clusters:** {metadata['n_clusters']}")
-    st.write(f"**Silhouette score:** {metadata['silhouette_score']}")
     st.write(
         "El nivel de riesgo no viene etiquetado en los datos originales: se "
         "asignó según el promedio de cargos médicos de cada cluster (a mayor "
